@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.lang.java.JavaLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,22 +56,26 @@ public class TestFileCreator {
         }
         
         String[] packageParts = packageName.split("\\.");
+        PsiDirectory currentDirectory = directory;
         for (String part : packageParts) {
             if (part.isEmpty()) {
                 continue;
             }
             
-            PsiDirectory subDir = directory.findSubdirectory(part);
+            PsiDirectory subDir = currentDirectory.findSubdirectory(part);
             if (subDir == null) {
+                final PsiDirectory dirToModify = currentDirectory;
+                final String dirPart = part;
                 final PsiDirectory[] resultDir = new PsiDirectory[1];
                 WriteCommandAction.runWriteCommandAction(project, () -> {
-                    resultDir[0] = directory.createSubdirectory(part);
+                    resultDir[0] = dirToModify.createSubdirectory(dirPart);
                 });
-                directory = resultDir[0];
+                currentDirectory = resultDir[0];
             } else {
-                directory = subDir;
+                currentDirectory = subDir;
             }
         }
+        directory = currentDirectory;
         
         // Check if test file already exists
         PsiFile existingFile = directory.findFile(testClassName + ".java");
