@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.13.3'
+}
+
+group 'com.kincheung.ollama'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.mockito:mockito-core:4.5.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version.set('2022.2.5')
+    type.set('IC') // Target IDE Platform - IC for Community, IU for Ultimate
+    plugins.set(['com.intellij.java'])
+}
+
+tasks {
+    patchPluginXml {
+        sinceBuild.set('222')
+        untilBuild.set('232.*')
+        changeNotes.set("""
+          <ul>
+            <li>Initial release</li>
+            <li>Generate JUnit 5 and Mockito unit tests using Ollama</li>
+            <li>Support for code inspection to identify classes missing tests</li>
+          </ul>
+        """)
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    runIde {
+        // Increase available memory
+        jvmArgs = ['-Xmx2048m']
+    }
+    
+    buildSearchableOptions {
+        enabled = false
+    }
+}
+
+compileJava {
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+    options.encoding = 'UTF-8'
+}

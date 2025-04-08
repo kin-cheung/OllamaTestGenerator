@@ -1,0 +1,51 @@
+modules = ["java", "java-17"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Gradle Build"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "gradle-build"
+
+[[workflows.workflow]]
+name = "Gradle Build"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew build"
+
+[[workflows.workflow]]
+name = "gradle-build"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew build --info"
+
+[deployment]
+run = ["sh", "-c", "./gradlew build"]
