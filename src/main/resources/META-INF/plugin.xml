@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>com.kincheung.ollama</id>
+    <name>Ollama Test Generator</name>
+    <vendor email="support@kincheung.com" url="https://www.kincheung.com">Kin Cheung</vendor>
+    
+    <!-- Compatibility with IntelliJ Platform Products -->
+    <idea-version since-build="222" until-build="241.*" />
+
+    <description><![CDATA[
+      <p>Generate JUnit 5 and Mockito unit tests for Java classes using Ollama.</p>
+      
+      <h3>Features:</h3>
+      <ul>
+        <li>Generate unit tests for Java classes with a right-click action</li>
+        <li>Configure Ollama settings and test generation options</li>
+        <li>Code inspection to identify classes missing tests</li>
+        <li>Leverages locally installed Ollama for test generation</li>
+      </ul>
+      
+      <p>Requires Ollama to be installed locally on your machine.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+    
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.kincheung.ollama.OllamaSettingsState"/>
+        <applicationConfigurable parentId="tools" 
+                                instance="com.kincheung.ollama.OllamaTestGeneratorConfigurable"
+                                id="com.kincheung.ollama.OllamaTestGeneratorConfigurable" 
+                                displayName="Ollama Test Generator"/>
+        <localInspection language="JAVA" 
+                        shortName="OllamaTestGeneratorInspection" 
+                        displayName="Class missing unit tests" 
+                        groupName="Ollama" 
+                        enabledByDefault="true" 
+                        level="WARNING"
+                        implementationClass="com.kincheung.ollama.OllamaTestGeneratorInspection"/>
+    </extensions>
+
+    <actions>
+        <action id="com.kincheung.ollama.GenerateTestAction" 
+                class="com.kincheung.ollama.OllamaTestGeneratorAction" 
+                text="Generate Unit Tests with Ollama" 
+                description="Generate JUnit 5 and Mockito unit tests using Ollama">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
