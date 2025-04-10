@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 )
 public class OllamaSettingsState implements PersistentStateComponent<OllamaSettingsState> {
     public String ollamaUrl = "http://localhost:11434";
-    public String modelName = "llama3";
+    public String modelName = "qwen2.5-coder:7b";
     public boolean includeMockito = true;
     public boolean includeComments = true;
     public int timeoutSeconds = 60;

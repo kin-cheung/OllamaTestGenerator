@@ -89,10 +89,10 @@ public class OllamaTestGeneratorDialog extends DialogWrapper {
             public void run(@NotNull ProgressIndicator indicator) {
                 indicator.setIndeterminate(true);
                 indicator.setText("Analyzing class...");
-                
-                String className = targetClass.getName();
-                String classCode = targetClass.getText();
-                
+
+                String className = ApplicationManager.getApplication().runReadAction((com.intellij.openapi.util.Computable<String>) targetClass::getName);
+                String classCode = ApplicationManager.getApplication().runReadAction((com.intellij.openapi.util.Computable<String>) targetClass::getText);
+
                 indicator.setText("Generating tests with Ollama...");
                 
                 OllamaService ollamaService = new OllamaService();

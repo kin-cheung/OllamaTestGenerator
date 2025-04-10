@@ -3,6 +3,7 @@ package com.kincheung.ollama;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -59,12 +60,14 @@ public class OllamaTestGeneratorAction extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        // Enable/disable the action depending on whether we're in a Java file
-        Project project = e.getProject();
-        VirtualFile file = e.getData(CommonDataKeys.VIRTUAL_FILE);
-        
-        boolean enabled = project != null && file != null && "java".equals(file.getExtension());
-        e.getPresentation().setEnabledAndVisible(enabled);
+        // Use invokeLater to ensure this code runs off EDT
+        ApplicationManager.getApplication().invokeLater(() -> {
+            Project project = e.getProject();
+            VirtualFile file = e.getData(CommonDataKeys.VIRTUAL_FILE);
+
+            boolean enabled = project != null && file != null && "java".equals(file.getExtension());
+            e.getPresentation().setEnabledAndVisible(enabled);
+        });
     }
 
     /**

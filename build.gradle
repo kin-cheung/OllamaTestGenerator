@@ -20,7 +20,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set('2023.3.4') // Update to a newer IntelliJ version
+    version.set('2024.3') // Update to a newer IntelliJ version
     type.set('IC') // Target IDE Platform - IC for Community, IU for Ultimate
     plugins.set(['com.intellij.java'])
     updateSinceUntilBuild.set(true)
@@ -30,7 +30,7 @@ intellij {
 tasks {
     patchPluginXml {
         sinceBuild.set('222') // Maintain compatibility with 2022.2
-        untilBuild.set('241.*') // Support up to 2024.1 and future minor updates
+        untilBuild.set('243.*') // Support up to 2024.1 and future minor updates
         changeNotes.set("""
           <ul>
             <li>Updated for compatibility with IntelliJ IDEA 2024.1</li>
