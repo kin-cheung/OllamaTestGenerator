@@ -64,7 +64,7 @@ The plugin is organized into several key components:
 
 ## Prerequisites
 
-- IntelliJ IDEA (Community or Ultimate) version 2022.2 through 2024.1
+- IntelliJ IDEA (Community or Ultimate) version 2022.2 through 2024.3
 - Java 17 or later
 - [Ollama](https://ollama.ai/) installed locally with a language model that can generate code (recommended: llama3 or codellama)
 

@@ -4,7 +4,7 @@
     <vendor email="support@kincheung.com" url="https://www.kincheung.com">Kin Cheung</vendor>
     
     <!-- Compatibility with IntelliJ Platform Products -->
-    <idea-version since-build="222" until-build="241.*" />
+    <idea-version since-build="222"  until-build="243.*" />
 
     <description><![CDATA[
       <p>Generate JUnit 5 and Mockito unit tests for Java classes using Ollama.</p>
