@@ -80,7 +80,7 @@ The plugin is organized into several key components:
 
 ### Option 2: Manual Installation
 
-1. Download the latest plugin release (ollama-test-generator-1.0.1.zip) from the [Releases](https://github.com/kin-cheung/ollama-test-generator/releases) page
+1. Download the latest plugin release (ollama-test-generator-1.0.2.zip) from the [Releases](https://github.com/kin-cheung/ollama-test-generator/releases) page
 2. Open IntelliJ IDEA
 3. Go to **Settings/Preferences > Plugins**
 4. Click the gear icon and select **Install Plugin from Disk...**
