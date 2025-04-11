@@ -66,7 +66,7 @@ The plugin is organized into several key components:
 
 - IntelliJ IDEA (Community or Ultimate) version 2022.2 through 2024.3
 - Java 17 or later
-- [Ollama](https://ollama.ai/) installed locally with a language model that can generate code (recommended: llama3 or codellama)
+- [Ollama](https://ollama.ai/) installed locally with a language model that can generate code (recommended: qwen2.5-coder:7b)
 
 ## Installation
 
@@ -101,7 +101,7 @@ After installation and restart, you should see:
 1. After installation, go to **Settings/Preferences > Tools > Ollama Test Generator**
 2. Configure the following essential settings:
    - **Ollama URL**: The URL where your Ollama instance is running (default: http://localhost:11434)
-   - **Model name**: The name of the model to use (default: llama3)
+   - **Model name**: The name of the model to use (default: qwen2.5-coder:7b)
    
 ### Advanced Options
 
@@ -117,7 +117,7 @@ Additional configuration options to customize test generation:
 If you haven't installed Ollama yet:
 1. Download and install from [ollama.ai](https://ollama.ai)
 2. Start the Ollama service
-3. Pull a suitable model: `ollama pull llama3` or `ollama pull codellama`
+3. Pull a suitable model: `ollama pull qwen2.5-coder:7b`
 4. Verify the service is running at http://localhost:11434 before using the plugin
 
 ## Usage
